@@ -1,9 +1,9 @@
-// Atualiza o relógio com horário NY (UTC-1 ou UTC-2 no horário de verão)
+// Atualiza o relógio com horário hora zero 
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
     data.setUTCSeconds(data.getUTCSeconds() + 19); // ajusta os seguntos )
-    data.setUTCHours(data.getUTCHours() + 3); // NY UTC-1 (ou UTC-2 no horário de verão automático)
+    data.setUTCHours(data.getUTCHours() + 3); // hora zero UTC-1 (ou UTC-2 no horário de verão automático)
     let h = data.getHours();
     let m = data.getMinutes();
     let s = data.getSeconds();
@@ -44,11 +44,11 @@ function exibirDataAtualizada() {
     document.getElementById("date").innerHTML = `${semanas[diasem]}, ${dia} ${meses[mes]}, ${ano}`;
 }
 
-// Atualiza a data à meia-noite NY
+// Atualiza a data à meia-noite hora zero
 function atualizarData() {
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 19); // Ajuste para o horário NY
-    data.setUTCHours(data.getUTCHours() + 3); // Ajuste para o horário NY
+    data.setUTCSeconds(data.getUTCSeconds() + 19); // Ajuste para o horário hora zero
+    data.setUTCHours(data.getUTCHours() + 3); // Ajuste para o horário hora zero
     let horas = data.getHours();
     let minutos = data.getMinutes();
     let segundos = data.getSeconds();
