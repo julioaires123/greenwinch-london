@@ -2,7 +2,7 @@
 setInterval(function relog() {
     let rel = document.getElementById('relogio01');
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 19); // ajusta os seguntos )
+    data.setUTCSeconds(data.getUTCSeconds() + 25); // ajusta os seguntos )
     data.setUTCHours(data.getUTCHours() + 3); // hora zero UTC-1 (ou UTC-2 no horário de verão automático)
     let h = data.getHours();
     let m = data.getMinutes();
@@ -47,7 +47,7 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite hora zero
 function atualizarData() {
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 19); // Ajuste para o horário hora zero
+    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajuste para o horário hora zero
     data.setUTCHours(data.getUTCHours() + 3); // Ajuste para o horário hora zero
     let horas = data.getHours();
     let minutos = data.getMinutes();
