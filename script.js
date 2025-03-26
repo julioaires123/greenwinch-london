@@ -1,58 +1,51 @@
-// Atualiza o relógio com horário hora zero 
-setInterval(function relog() {
-    let rel = document.getElementById('relogio01');
-    let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25); // ajusta os seguntos )
-    data.setUTCHours(data.getUTCHours() + 3); // hora zero UTC-1 (ou UTC-2 no horário de verão automático)
-    let h = data.getHours();
-    let m = data.getMinutes();
-    let s = data.getSeconds();
+setInterval(function atualizarRelogio() {
+    let relogio = document.getElementById('relogio01');
+    let data = new Date(); // Obtém a hora exata UTC
     
-    if (h < 10) h = `0${h}`;
-    if (m < 10) m = `0${m}`;
-    if (s < 10) s = `0${s}`;
+    // Ajuste para o fuso horário de Greenwich (UTC)
+    let opcoes = { timeZone: "UTC", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
+    let horarioGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
     
-    rel.innerHTML = `${h}:${m}:${s}`;
+    let h = horarioGMT.find(part => part.type === "hour").value;
+    let m = horarioGMT.find(part => part.type === "minute").value;
+    let s = horarioGMT.find(part => part.type === "second").value;
+    
+    relogio.innerHTML = `${h}:${m}:${s}`;
 }, 1000);
 
-// Função para exibir a data atualizada
+// Função para exibir a data atualizada corretamente
 function exibirDataAtualizada() {
-   let meses = [
-      "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December"
+    let meses = [
+        "January", "February", "March", "April", "May", "June", 
+        "July", "August", "September", "October", "November", "December"
     ];
     
     let semanas = [
-      "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     ];
-
-  let data = new Date();
-  let diasem = data.getDay();
-  let dia = data.getDate();
-  let mes = data.getMonth();
-  let ano = data.getFullYear();
-
-  // Verifica se é meia-noite (00:00:00)
-  if (data.getHours() === 0 && data.getMinutes() === 0 && data.getSeconds() === 0) {
-    // Incrementa um dia
-    data.setDate(data.getDate() + 0);
-    dia = data.getDate();
-    mes = data.getMonth();
-    ano = data.getFullYear();
-  }
     
-    document.getElementById("date").innerHTML = `${semanas[diasem]}, ${dia} ${meses[mes]}, ${ano}`;
+    let data = new Date();
+    let opcoes = { timeZone: "UTC", weekday: "long", day: "2-digit", month: "long", year: "numeric" };
+    let dataGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
+    
+    let diasem = dataGMT.find(part => part.type === "weekday").value;
+    let dia = dataGMT.find(part => part.type === "day").value;
+    let mes = dataGMT.find(part => part.type === "month").value;
+    let ano = dataGMT.find(part => part.type === "year").value;
+    
+    document.getElementById("date").innerHTML = `${diasem}, ${dia} ${mes}, ${ano}`;
 }
 
-// Atualiza a data à meia-noite hora zero
+// Atualiza a data à meia-noite UTC
 function atualizarData() {
     let data = new Date();
-    data.setUTCSeconds(data.getUTCSeconds() + 25); // Ajuste para o horário hora zero
-    data.setUTCHours(data.getUTCHours() + 3); // Ajuste para o horário hora zero
-    let horas = data.getHours();
-    let minutos = data.getMinutes();
-    let segundos = data.getSeconds();
-
+    let opcoes = { timeZone: "UTC", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
+    let horarioGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
+    
+    let horas = parseInt(horarioGMT.find(part => part.type === "hour").value);
+    let minutos = parseInt(horarioGMT.find(part => part.type === "minute").value);
+    let segundos = parseInt(horarioGMT.find(part => part.type === "second").value);
+    
     if (horas === 0 && minutos === 0 && segundos === 0) {
         exibirDataAtualizada();
     }
