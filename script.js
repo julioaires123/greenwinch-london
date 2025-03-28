@@ -1,8 +1,10 @@
-setInterval(function atualizarRelogio() {
+setInterval(function atualizarRelogio() { 
     let relogio = document.getElementById('relogio01');
     let data = new Date(); // Obtém a hora exata UTC
     
-    // Ajuste para o fuso horário de Greenwich (UTC)
+    // Incrementa 21 segundos
+    data.setSeconds(data.getSeconds() + 21);
+    
     let opcoes = { timeZone: "UTC", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
     let horarioGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
     
@@ -15,16 +17,11 @@ setInterval(function atualizarRelogio() {
 
 // Função para exibir a data atualizada corretamente
 function exibirDataAtualizada() {
-    let meses = [
-        "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December"
-    ];
-    
-    let semanas = [
-        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-    ];
-    
     let data = new Date();
+    
+    // Incrementa 21 segundos
+    data.setSeconds(data.getSeconds() + 21);
+    
     let opcoes = { timeZone: "UTC", weekday: "long", day: "2-digit", month: "long", year: "numeric" };
     let dataGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
     
@@ -39,6 +36,10 @@ function exibirDataAtualizada() {
 // Atualiza a data à meia-noite UTC
 function atualizarData() {
     let data = new Date();
+    
+    // Incrementa 21 segundos
+    data.setSeconds(data.getSeconds() + 21);
+    
     let opcoes = { timeZone: "UTC", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
     let horarioGMT = new Intl.DateTimeFormat("en-US", opcoes).formatToParts(data);
     
